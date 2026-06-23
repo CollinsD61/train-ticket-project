@@ -1,0 +1,111 @@
+{{- if .Values.nacos.enabled }}
+apiVersion: v1
+kind: Secret
+metadata:
+  name: nacos-db-secret
+  labels:
+    {{- include "train-ticket.labels" . | nindent 4 }}
+type: Opaque
+stringData:
+  MYSQL_SERVICE_HOST: {{ .Values.global.mysql.host | quote }}
+  MYSQL_SERVICE_PORT: {{ .Values.global.mysql.port | quote }}
+  MYSQL_SERVICE_DB_NAME: "nacos"
+  MYSQL_SERVICE_USER: {{ .Values.global.mysql.username | quote }}
+  MYSQL_SERVICE_PASSWORD: {{ .Values.global.mysql.password | quote }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.nacos.headlessService }}
+  labels:
+    app: nacos
+spec:
+  ports:
+    - port: {{ .Values.nacos.serverPort }}
+      name: server
+    - port: 7848
+      name: old-rpc
+    - port: 9848
+      name: client-rpc
+    - port: 9849
+      name: raft-rpc
+  clusterIP: None
+  selector:
+    app: nacos
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nacos
+  labels:
+    app: nacos
+spec:
+  type: NodePort
+  ports:
+    - port: {{ .Values.nacos.serverPort }}
+      targetPort: {{ .Values.nacos.serverPort }}
+      nodePort: 38848
+      name: http
+  selector:
+    app: nacos
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: nacos
+  labels:
+    app: nacos
+spec:
+  serviceName: {{ .Values.nacos.headlessService }}
+  replicas: {{ .Values.nacos.replicaCount }}
+  selector:
+    matchLabels:
+      app: nacos
+  template:
+    metadata:
+      labels:
+        app: nacos
+    spec:
+      initContainers:
+        - name: initmysql
+          image: "codewisdom/mysqlclient:0.1"
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: nacos-db-secret
+      containers:
+        - name: k8snacos
+          image: "{{ .Values.nacos.image.repository }}:{{ .Values.nacos.image.tag }}"
+          imagePullPolicy: {{ .Values.nacos.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.nacos.serverPort }}
+              name: client
+            - containerPort: 7848
+              name: old-rpc
+            - containerPort: 9848
+              name: client-rpc
+            - containerPort: 9849
+              name: raft-rpc
+          env:
+            - name: NACOS_REPLICAS
+              value: {{ .Values.nacos.replicaCount | quote }}
+            - name: NACOS_SERVER_PORT
+              value: {{ .Values.nacos.serverPort | quote }}
+            - name: NACOS_APPLICATION_PORT
+              value: {{ .Values.nacos.serverPort | quote }}
+            - name: PREFER_HOST_MODE
+              value: hostname
+            - name: MODE
+              value: {{ if eq (int .Values.nacos.replicaCount) 1 }}"standalone"{{ else }}"cluster"{{ end }}
+            {{- if gt (int .Values.nacos.replicaCount) 1 }}
+            - name: NACOS_SERVERS
+              value: "nacos-0.{{ .Values.nacos.headlessService }}.{{ .Release.Namespace }}.svc.{{ .Values.nacos.domainName }}:{{ .Values.nacos.serverPort }} nacos-1.{{ .Values.nacos.headlessService }}.{{ .Release.Namespace }}.svc.{{ .Values.nacos.domainName }}:{{ .Values.nacos.serverPort }} nacos-2.{{ .Values.nacos.headlessService }}.{{ .Release.Namespace }}.svc.{{ .Values.nacos.domainName }}:{{ .Values.nacos.serverPort }}"
+            {{- end }}
+          envFrom:
+            - secretRef:
+                name: nacos-db-secret
+          resources:
+            requests:
+              cpu: 500m
+              memory: 1Gi
+{{- end }}

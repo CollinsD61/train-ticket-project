@@ -1,0 +1,6 @@
+apiVersion: v2
+name: train-ticket
+description: A Helm chart for deploying the Train Ticket microservices application on-premise.
+type: application
+version: 1.0.0
+appVersion: "1.0.0"

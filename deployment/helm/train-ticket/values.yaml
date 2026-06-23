@@ -1,0 +1,632 @@
+global:
+  mysql:
+    host: 192.168.1.107
+    port: 3306
+    username: train_ticket
+    password: train_ticket123
+    rootPassword: ChangeMe123!
+    database: train_ticket
+  rabbitmq:
+    host: 192.168.1.107
+    port: 5672
+    username: train_ticket
+    password: train_ticket123
+    vhost: train-ticket
+  mongodb:
+    host: 192.168.1.107
+    port: 27017
+    username: train_ticket
+    password: ChangeMe123!
+    bindIp: 0.0.0.0
+nacos:
+  enabled: true
+  replicaCount: 1
+  image:
+    repository: nacos/nacos-server
+    tag: 2.0.1
+    pullPolicy: IfNotPresent
+  serverPort: 8848
+  headlessService: nacos-headless
+  domainName: cluster.local
+defaultReplicas: 1
+services:
+  ts-admin-basic-info-service:
+    port: 18767
+    image: codewisdom/ts-admin-basic-info-service:1.0.0
+    type: ClusterIP
+    hasRabbit: false
+    dbPrefix: null
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 2000Mi
+  ts-admin-order-service:
+    port: 16112
+    image: codewisdom/ts-admin-order-service:1.0.1
+    type: ClusterIP
+    hasRabbit: false
+    dbPrefix: null
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 2000Mi
+  ts-admin-route-service:
+    port: 16113
+    image: codewisdom/ts-admin-route-service:1.0.0
+    type: ClusterIP
+    hasRabbit: false
+    dbPrefix: null
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 2000Mi
+  ts-admin-travel-service:
+    port: 16114
+    image: codewisdom/ts-admin-travel-service:1.0.0
+    type: ClusterIP
+    hasRabbit: false
+    dbPrefix: null
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 2000Mi
+  ts-admin-user-service:
+    port: 16115
+    image: codewisdom/ts-admin-user-service:1.0.1
+    type: ClusterIP
+    hasRabbit: false
+    dbPrefix: null
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 2000Mi
+  ts-assurance-service:
+    port: 18888
+    image: codewisdom/ts-assurance-service:1.0.0
+    type: ClusterIP
+    hasRabbit: false
+    dbPrefix: ASSURANCE_
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 2000Mi
+  ts-auth-service:
+    port: 12340
+    image: codewisdom/ts-auth-service:1.0.0
+    type: ClusterIP
+    hasRabbit: false
+    dbPrefix: AUTH_
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 2000Mi
+  ts-avatar-service:
+    port: 17001
+    image: codewisdom/ts-avatar-service:0.2.0
+    type: ClusterIP
+    hasRabbit: false
+    dbPrefix: null
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 2000Mi
+  ts-basic-service:
+    port: 15680
+    image: codewisdom/ts-basic-service:1.0.0
+    type: ClusterIP
+    hasRabbit: false
+    dbPrefix: null
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 2000Mi
+  ts-cancel-service:
+    port: 18885
+    image: codewisdom/ts-cancel-service:1.0.0
+    type: ClusterIP
+    hasRabbit: false
+    dbPrefix: null
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 2000Mi
+  ts-config-service:
+    port: 15679
+    image: codewisdom/ts-config-service:1.0.0
+    type: ClusterIP
+    hasRabbit: false
+    dbPrefix: CONFIG_
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 2000Mi
+  ts-consign-price-service:
+    port: 16110
+    image: codewisdom/ts-consign-price-service:1.0.0
+    type: ClusterIP
+    hasRabbit: false
+    dbPrefix: CONSIGN_PRICE_
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 2000Mi
+  ts-consign-service:
+    port: 16111
+    image: codewisdom/ts-consign-service:1.0.1
+    type: ClusterIP
+    hasRabbit: false
+    dbPrefix: CONSIGN_
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 2000Mi
+  ts-contacts-service:
+    port: 12347
+    image: codewisdom/ts-contacts-service:1.0.0
+    type: ClusterIP
+    hasRabbit: false
+    dbPrefix: CONTACTS_
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 2000Mi
+  ts-delivery-service:
+    port: 18808
+    image: codewisdom/ts-delivery-service:1.0.0
+    type: ClusterIP
+    hasRabbit: true
+    dbPrefix: DELIVERY_
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 2000Mi
+  ts-execute-service:
+    port: 12386
+    image: codewisdom/ts-execute-service:1.0.0
+    type: ClusterIP
+    hasRabbit: false
+    dbPrefix: null
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 2000Mi
+  ts-food-service:
+    port: 18856
+    image: codewisdom/ts-food-service:1.0.0
+    type: ClusterIP
+    hasRabbit: true
+    dbPrefix: FOOD_
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 2000Mi
+  ts-gateway-service:
+    port: 18888
+    image: codewisdom/ts-gateway-service:1.0.0
+    type: NodePort
+    hasRabbit: false
+    dbPrefix: null
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 2000Mi
+    nodePort: 30467
+  ts-inside-payment-service:
+    port: 18673
+    image: codewisdom/ts-inside-payment-service:1.0.0
+    type: ClusterIP
+    hasRabbit: false
+    dbPrefix: INSIDE_PAYMENT_
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 2000Mi
+  ts-news-service:
+    port: 12862
+    image: codewisdom/ts-news-service:1.0.0
+    type: ClusterIP
+    hasRabbit: false
+    dbPrefix: null
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 2000Mi
+  ts-notification-service:
+    port: 17853
+    image: codewisdom/ts-notification-service:1.0.0
+    type: ClusterIP
+    hasRabbit: true
+    dbPrefix: NOTIFICATION_
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 2000Mi
+  ts-order-other-service:
+    port: 12032
+    image: codewisdom/ts-order-other-service:1.0.1
+    type: ClusterIP
+    hasRabbit: true
+    dbPrefix: ORDER_OTHER_
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 2000Mi
+  ts-order-service:
+    port: 12031
+    image: codewisdom/ts-order-service:1.0.1
+    type: ClusterIP
+    hasRabbit: true
+    dbPrefix: ORDER_
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 2000Mi
+  ts-payment-service:
+    port: 19001
+    image: codewisdom/ts-payment-service:1.0.0
+    type: ClusterIP
+    hasRabbit: false
+    dbPrefix: PAYMENT_
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 2000Mi
+  ts-preserve-other-service:
+    port: 14569
+    image: codewisdom/ts-preserve-other-service:1.0.0
+    type: ClusterIP
+    hasRabbit: true
+    dbPrefix: null
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 2000Mi
+  ts-preserve-service:
+    port: 14568
+    image: codewisdom/ts-preserve-service:1.0.0
+    type: ClusterIP
+    hasRabbit: true
+    dbPrefix: null
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 2000Mi
+  ts-price-service:
+    port: 16579
+    image: codewisdom/ts-price-service:1.0.0
+    type: ClusterIP
+    hasRabbit: false
+    dbPrefix: PRICE_
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 2000Mi
+  ts-rebook-service:
+    port: 18886
+    image: codewisdom/ts-rebook-service:1.0.1
+    type: ClusterIP
+    hasRabbit: true
+    dbPrefix: null
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 2000Mi
+  ts-route-plan-service:
+    port: 14578
+    image: codewisdom/ts-route-plan-service:1.0.0
+    type: ClusterIP
+    hasRabbit: false
+    dbPrefix: null
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 2000Mi
+  ts-route-service:
+    port: 11178
+    image: codewisdom/ts-route-service:1.0.0
+    type: ClusterIP
+    hasRabbit: false
+    dbPrefix: ROUTE_
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 2000Mi
+  ts-seat-service:
+    port: 18898
+    image: codewisdom/ts-seat-service:1.0.0
+    type: ClusterIP
+    hasRabbit: false
+    dbPrefix: null
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 2000Mi
+  ts-security-service:
+    port: 11188
+    image: codewisdom/ts-security-service:1.0.0
+    type: ClusterIP
+    hasRabbit: false
+    dbPrefix: SECURITY_
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 2000Mi
+  ts-station-food-service:
+    port: 18855
+    image: codewisdom/ts-station-food-service:1.0.0
+    type: ClusterIP
+    hasRabbit: false
+    dbPrefix: STATION_FOOD_
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 2000Mi
+  ts-station-service:
+    port: 12345
+    image: codewisdom/ts-station-service:1.0.1
+    type: ClusterIP
+    hasRabbit: false
+    dbPrefix: STATION_
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 2000Mi
+  ts-ticket-office-service:
+    port: 16108
+    image: codewisdom/ts-ticket-office-service:1.0.0
+    type: ClusterIP
+    hasRabbit: false
+    dbPrefix: TICKET_OFFICE_
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 2000Mi
+  ts-train-food-service:
+    port: 19999
+    image: codewisdom/ts-train-food-service:1.0.0
+    type: ClusterIP
+    hasRabbit: false
+    dbPrefix: TRAIN_FOOD_
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 2000Mi
+  ts-train-service:
+    port: 14567
+    image: codewisdom/ts-train-service:1.0.0
+    type: ClusterIP
+    hasRabbit: false
+    dbPrefix: TRAIN_
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 2000Mi
+  ts-travel-plan-service:
+    port: 14322
+    image: codewisdom/ts-travel-plan-service:1.0.0
+    type: ClusterIP
+    hasRabbit: false
+    dbPrefix: null
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 2000Mi
+  ts-travel-service:
+    port: 12346
+    image: codewisdom/ts-travel-service:1.0.0
+    type: ClusterIP
+    hasRabbit: false
+    dbPrefix: TRAVEL_
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 2000Mi
+  ts-travel2-service:
+    port: 16346
+    image: codewisdom/ts-travel2-service:1.0.0
+    type: ClusterIP
+    hasRabbit: false
+    dbPrefix: TRAVEL2_
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 2000Mi
+  ts-user-service:
+    port: 12342
+    image: codewisdom/ts-user-service:1.0.1
+    type: ClusterIP
+    hasRabbit: false
+    dbPrefix: USER_
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 2000Mi
+  ts-verification-code-service:
+    port: 15678
+    image: codewisdom/ts-verification-code-service:1.0.0
+    type: ClusterIP
+    hasRabbit: false
+    dbPrefix: null
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 2000Mi
+  ts-voucher-service:
+    port: 16101
+    image: codewisdom/ts-voucher-service:1.0.0
+    type: ClusterIP
+    hasRabbit: false
+    dbPrefix: VOUCHER_
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 2000Mi
+  ts-ui-dashboard:
+    port: 8080
+    image: codewisdom/ts-ui-dashboard:1.0.1
+    type: NodePort
+    hasRabbit: false
+    dbPrefix: null
+    resources:
+      requests:
+        cpu: 50m
+        memory: 100Mi
+      limits:
+        cpu: 500m
+        memory: 500Mi
+    nodePort: 32677
+  ts-food-delivery-service:
+    port: 8080
+    image: codewisdom/ts-food-delivery-service:1.0.0
+    type: ClusterIP
+    hasRabbit: false
+    dbPrefix: FOOD_DELIVERY_
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 2000Mi
+  ts-wait-order-service:
+    port: 8080
+    image: codewisdom/ts-wait-order-service:1.0.1
+    type: ClusterIP
+    hasRabbit: false
+    dbPrefix: WAIT_ORDER_
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+      limits:
+        cpu: 500m
+        memory: 2000Mi

@@ -1,0 +1,21 @@
+{{- range $name, $service := .Values.services }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $name }}
+  labels:
+    app: {{ $name }}
+    {{- include "train-ticket.labels" $ | nindent 4 }}
+spec:
+  type: {{ $service.type | default "ClusterIP" }}
+  ports:
+    - port: {{ $service.port }}
+      targetPort: {{ $service.port }}
+      name: http
+      {{- if and (eq $service.type "NodePort") $service.nodePort }}
+      nodePort: {{ $service.nodePort }}
+      {{- end }}
+  selector:
+    app: {{ $name }}
+---
+{{- end }}
