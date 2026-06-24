@@ -606,7 +606,7 @@ services:
     nodePort: 32677
   ts-food-delivery-service:
     port: 8080
-    image: codewisdom/ts-food-delivery-service:1.0.0
+    image: ghcr.io/collinsd61/ts-food-delivery-service:98f1276fe839b9039c5434c57b35018a91d9cd06
     type: ClusterIP
     hasRabbit: false
     dbPrefix: FOOD_DELIVERY_
