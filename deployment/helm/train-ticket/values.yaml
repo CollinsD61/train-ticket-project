@@ -579,7 +579,7 @@ services:
         memory: 2000Mi
   ts-voucher-service:
     port: 16101
-    image: codewisdom/ts-voucher-service:1.0.0
+    image: ghcr.io/collinsd61/ts-voucher-service:98f1276fe839b9039c5434c57b35018a91d9cd06
     type: ClusterIP
     hasRabbit: false
     dbPrefix: VOUCHER_
