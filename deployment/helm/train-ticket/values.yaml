@@ -332,7 +332,7 @@ services:
         memory: 2000Mi
   ts-payment-service:
     port: 19001
-    image: codewisdom/ts-payment-service:1.0.0
+    image: ghcr.io/collinsd61/ts-payment-service:3adc40b115e1eb8d50899f13082e37dbe7d1bb67
     type: ClusterIP
     hasRabbit: false
     dbPrefix: PAYMENT_
