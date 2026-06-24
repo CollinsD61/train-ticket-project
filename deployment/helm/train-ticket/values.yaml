@@ -253,7 +253,7 @@ services:
         memory: 2000Mi
   ts-gateway-service:
     port: 18888
-    image: codewisdom/ts-gateway-service:1.0.0
+    image: ghcr.io/collinsd61/ts-gateway-service:98f1276fe839b9039c5434c57b35018a91d9cd06
     type: NodePort
     hasRabbit: false
     dbPrefix: null
