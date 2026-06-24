@@ -280,7 +280,7 @@ services:
         memory: 2000Mi
   ts-news-service:
     port: 12862
-    image: codewisdom/ts-news-service:1.0.0
+    image: ghcr.io/collinsd61/ts-news-service:c70b2e0776c8e47386513e161564a8a41793ca56
     type: ClusterIP
     hasRabbit: false
     dbPrefix: null
