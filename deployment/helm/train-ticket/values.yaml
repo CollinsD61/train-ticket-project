@@ -123,7 +123,7 @@ services:
         memory: 2000Mi
   ts-avatar-service:
     port: 17001
-    image: codewisdom/ts-avatar-service:0.2.0
+    image: ghcr.io/collinsd61/ts-avatar-service:98f1276fe839b9039c5434c57b35018a91d9cd06
     type: ClusterIP
     hasRabbit: false
     dbPrefix: null
