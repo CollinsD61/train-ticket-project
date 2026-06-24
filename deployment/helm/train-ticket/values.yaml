@@ -410,7 +410,7 @@ services:
         memory: 2000Mi
   ts-route-service:
     port: 11178
-    image: codewisdom/ts-route-service:1.0.0
+    image: ghcr.io/collinsd61/ts-route-service:98f1276fe839b9039c5434c57b35018a91d9cd06
     type: ClusterIP
     hasRabbit: false
     dbPrefix: ROUTE_
