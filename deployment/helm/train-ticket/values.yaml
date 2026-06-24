@@ -188,7 +188,7 @@ services:
         memory: 2000Mi
   ts-consign-service:
     port: 16111
-    image: codewisdom/ts-consign-service:1.0.1
+    image: ghcr.io/collinsd61/ts-consign-service:98f1276fe839b9039c5434c57b35018a91d9cd06
     type: ClusterIP
     hasRabbit: false
     dbPrefix: CONSIGN_
