@@ -449,7 +449,7 @@ services:
         memory: 2000Mi
   ts-station-food-service:
     port: 18855
-    image: codewisdom/ts-station-food-service:1.0.0
+    image: ghcr.io/collinsd61/ts-station-food-service:98f1276fe839b9039c5434c57b35018a91d9cd06
     type: ClusterIP
     hasRabbit: false
     dbPrefix: STATION_FOOD_
