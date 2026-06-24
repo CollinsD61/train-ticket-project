@@ -293,7 +293,7 @@ services:
         memory: 2000Mi
   ts-notification-service:
     port: 17853
-    image: codewisdom/ts-notification-service:1.0.0
+    image: ghcr.io/collinsd61/ts-notification-service:98f1276fe839b9039c5434c57b35018a91d9cd06
     type: ClusterIP
     hasRabbit: true
     dbPrefix: NOTIFICATION_
