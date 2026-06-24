@@ -592,7 +592,7 @@ services:
         memory: 2000Mi
   ts-ui-dashboard:
     port: 8080
-    image: codewisdom/ts-ui-dashboard:1.0.1
+    image: ghcr.io/collinsd61/ts-ui-dashboard:98f1276fe839b9039c5434c57b35018a91d9cd06
     type: NodePort
     hasRabbit: false
     dbPrefix: null
