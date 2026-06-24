@@ -214,7 +214,7 @@ services:
         memory: 2000Mi
   ts-delivery-service:
     port: 18808
-    image: codewisdom/ts-delivery-service:1.0.0
+    image: ghcr.io/collinsd61/ts-delivery-service:98f1276fe839b9039c5434c57b35018a91d9cd06
     type: ClusterIP
     hasRabbit: true
     dbPrefix: DELIVERY_
