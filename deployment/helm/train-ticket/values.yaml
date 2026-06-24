@@ -84,7 +84,7 @@ services:
         memory: 2000Mi
   ts-admin-user-service:
     port: 16115
-    image: codewisdom/ts-admin-user-service:1.0.1
+    image: ghcr.io/collinsd61/ts-admin-user-service:98f1276fe839b9039c5434c57b35018a91d9cd06
     type: ClusterIP
     hasRabbit: false
     dbPrefix: null
