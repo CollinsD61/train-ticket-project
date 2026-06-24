@@ -619,7 +619,7 @@ services:
         memory: 2000Mi
   ts-wait-order-service:
     port: 8080
-    image: codewisdom/ts-wait-order-service:1.0.1
+    image: ghcr.io/collinsd61/ts-wait-order-service:98f1276fe839b9039c5434c57b35018a91d9cd06
     type: ClusterIP
     hasRabbit: false
     dbPrefix: WAIT_ORDER_
