@@ -104,8 +104,4 @@ spec:
           envFrom:
             - secretRef:
                 name: nacos-db-secret
-          resources:
-            requests:
-              cpu: 500m
-              memory: 1Gi
 {{- end }}

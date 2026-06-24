@@ -38,10 +38,6 @@ spec:
             - secretRef:
                 name: {{ $name }}-mysql
             {{- end }}
-          {{- if $service.resources }}
-          resources:
-            {{- toYaml $service.resources | nindent 12 }}
-          {{- end }}
           readinessProbe:
             tcpSocket:
               port: {{ $service.port }}
