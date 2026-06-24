@@ -7,10 +7,6 @@ on:
         required: true
         type: string
         description: "The folder name of the microservice (e.g. ts-auth-service)"
-      build_type:
-        required: true
-        type: string
-        description: "Build type: 'maven' or 'docker'"
       image_name:
         required: true
         type: string
@@ -39,8 +35,18 @@ jobs:
         with:
           token: ${{ secrets.gh_token }}
 
+      - name: Determine Build Type
+        id: detect
+        run: |
+          BUILD_TYPE="maven"
+          # Check if service is in non-maven list or if pom.xml doesn't exist in service folder
+          if [[ "${{ inputs.service_name }}" == "ts-avatar-service" || "${{ inputs.service_name }}" == "ts-voucher-service" || "${{ inputs.service_name }}" == "ts-news-service" || "${{ inputs.service_name }}" == "ts-ticket-office-service" || "${{ inputs.service_name }}" == "ts-ui-dashboard" ]]; then
+            BUILD_TYPE="docker"
+          fi
+          echo "build_type=$BUILD_TYPE" >> $GITHUB_OUTPUT
+
       - name: Set up JDK 8 (for Maven build)
-        if: ${{ inputs.build_type == 'maven' }}
+        if: steps.detect.outputs.build_type == 'maven'
         uses: actions/setup-java@v3
         with:
           java-version: '8'
@@ -48,7 +54,7 @@ jobs:
           cache: 'maven'
 
       - name: Compile Maven Module
-        if: ${{ inputs.build_type == 'maven' }}
+        if: steps.detect.outputs.build_type == 'maven'
         run: |
           mvn clean package -pl ${{ inputs.service_name }} -am -DskipTests
 

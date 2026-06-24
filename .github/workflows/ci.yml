@@ -257,30 +257,15 @@ jobs:
 
   build-and-push:
     needs: detect-changes
-    if: ${{ needs.detect-changes.outputs.changes != '[]' && needs.detect-changes.outputs.changes != '' }}
-    runs-on: ubuntu-latest
+    if: needs.detect-changes.outputs.changes != '[]' && needs.detect-changes.outputs.changes != ''
     strategy:
       matrix:
         # Determine the changed services and run build job for each
         service: ${{ fromJSON(needs.detect-changes.outputs.changes) }}
       fail-fast: false
-    steps:
-      - name: Determine Build Type
-        id: info
-        run: |
-          SERVICE_NAME="${ matrix.service }"
-          BUILD_TYPE="maven"
-          # Check if service is in non-maven list
-          if [[ "$SERVICE_NAME" == "ts-avatar-service" || "$SERVICE_NAME" == "ts-voucher-service" || "$SERVICE_NAME" == "ts-news-service" || "$SERVICE_NAME" == "ts-ticket-office-service" || "$SERVICE_NAME" == "ts-ui-dashboard" ]]; then
-            BUILD_TYPE="docker"
-          fi
-          echo "build_type=$BUILD_TYPE" >> $GITHUB_OUTPUT
-
-      - name: Call Reusable Build Workflow
-        uses: ./.github/workflows/reusable-build.yml
-        with:
-          service_name: ${{ matrix.service }}
-          build_type: ${{ steps.info.outputs.build_type }}
-          image_name: ${{ matrix.service }}
-        secrets:
-          gh_token: ${{ secrets.GITHUB_TOKEN }}
+    uses: ./.github/workflows/reusable-build.yml
+    with:
+      service_name: ${{ matrix.service }}
+      image_name: ${{ matrix.service }}
+    secrets:
+      gh_token: ${{ secrets.GITHUB_TOKEN }}
