@@ -17,7 +17,7 @@ jobs:
       changes: ${{ steps.filter.outputs.changes }}
     steps:
       - name: Checkout Code
-        uses: actions/checkout:v3
+        uses: actions/checkout@v3
 
       - name: Path Filter
         id: filter
