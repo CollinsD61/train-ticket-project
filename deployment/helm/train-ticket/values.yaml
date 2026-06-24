@@ -384,7 +384,7 @@ services:
         memory: 2000Mi
   ts-rebook-service:
     port: 18886
-    image: codewisdom/ts-rebook-service:1.0.1
+    image: ghcr.io/collinsd61/ts-rebook-service:98f1276fe839b9039c5434c57b35018a91d9cd06
     type: ClusterIP
     hasRabbit: true
     dbPrefix: null
