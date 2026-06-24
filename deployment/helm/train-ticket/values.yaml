@@ -475,7 +475,7 @@ services:
         memory: 2000Mi
   ts-ticket-office-service:
     port: 16108
-    image: codewisdom/ts-ticket-office-service:1.0.0
+    image: ghcr.io/collinsd61/ts-ticket-office-service:98f1276fe839b9039c5434c57b35018a91d9cd06
     type: ClusterIP
     hasRabbit: false
     dbPrefix: TICKET_OFFICE_
