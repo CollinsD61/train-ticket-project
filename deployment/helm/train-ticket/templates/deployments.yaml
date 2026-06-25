@@ -7,6 +7,8 @@ metadata:
     app: {{ $name }}
     {{- include "train-ticket.labels" $ | nindent 4 }}
 spec:
+  strategy:
+    type: Recreate
   replicas: {{ $service.replicas | default $.Values.defaultReplicas | default 1 }}
   selector:
     matchLabels:
