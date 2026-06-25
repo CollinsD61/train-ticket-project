@@ -41,7 +41,7 @@ spec:
           readinessProbe:
             tcpSocket:
               port: {{ $service.port }}
-            initialDelaySeconds: 60
+            initialDelaySeconds: 240
             periodSeconds: 10
             timeoutSeconds: 5
 ---

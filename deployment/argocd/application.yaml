@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: 'https://github.com/CollinsD61/train-ticket-project.git'
-    targetRevision: HEAD
+    targetRevision: main
     path: deployment/helm/train-ticket
   destination:
     server: 'https://kubernetes.default.svc'
