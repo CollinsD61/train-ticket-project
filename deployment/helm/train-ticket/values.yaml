@@ -23,7 +23,7 @@ nacos:
   replicaCount: 1
   image:
     repository: nacos/nacos-server
-    tag: 2.0.1
+    tag: v3.2.2
     pullPolicy: IfNotPresent
   serverPort: 8848
   headlessService: nacos-headless
