@@ -44,7 +44,7 @@ spec:
   ports:
     - port: {{ .Values.nacos.serverPort }}
       targetPort: {{ .Values.nacos.serverPort }}
-      nodePort: 38848
+      nodePort: 30848
       name: http
   selector:
     app: nacos
