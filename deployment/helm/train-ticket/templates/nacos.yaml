@@ -97,6 +97,14 @@ spec:
               value: hostname
             - name: MODE
               value: {{ if eq (int .Values.nacos.replicaCount) 1 }}"standalone"{{ else }}"cluster"{{ end }}
+            - name: NACOS_AUTH_ENABLE
+              value: "false"
+            - name: NACOS_AUTH_TOKEN
+              value: "U2VjcmV0S2V5Rm9yTmFjb3NKV1RTaWduYXR1cmVEb3VibGVDaGVja0lzSXRMb25nRW5vdWdoWWVzSXRJcw=="
+            - name: NACOS_AUTH_IDENTITY_KEY
+              value: "nacos-server"
+            - name: NACOS_AUTH_IDENTITY_VALUE
+              value: "nacos-server-identity-value"
             {{- if gt (int .Values.nacos.replicaCount) 1 }}
             - name: NACOS_SERVERS
               value: "nacos-0.{{ .Values.nacos.headlessService }}.{{ .Release.Namespace }}.svc.{{ .Values.nacos.domainName }}:{{ .Values.nacos.serverPort }} nacos-1.{{ .Values.nacos.headlessService }}.{{ .Release.Namespace }}.svc.{{ .Values.nacos.domainName }}:{{ .Values.nacos.serverPort }} nacos-2.{{ .Values.nacos.headlessService }}.{{ .Release.Namespace }}.svc.{{ .Values.nacos.domainName }}:{{ .Values.nacos.serverPort }}"
